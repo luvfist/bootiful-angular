@@ -13,7 +13,7 @@ class TodoService(val todoRepository: TodoRepository) {
     fun findOneById(id: Int): Todo {
         val optional = this.todoRepository.findById(id)
 
-        if (optional.isEmpty) throw TodoNotFoundException("There is no todo with id: $id")
+        if (!optional.isPresent) throw TodoNotFoundException("There is no todo with id: $id")
 
         return optional.get()
     }
@@ -27,7 +27,7 @@ class TodoService(val todoRepository: TodoRepository) {
     fun update(id: Int, form: TodoForm): Todo {
         val optional = this.todoRepository.findById(id)
 
-        if (optional.isEmpty) throw TodoNotFoundException("There is no todo with id: $id")
+        if (!optional.isPresent) throw TodoNotFoundException("There is no todo with id: $id")
 
         val todo = optional.get()
         todo.text = form.text
@@ -39,7 +39,7 @@ class TodoService(val todoRepository: TodoRepository) {
     fun toggle(id: Int): Todo {
         val optional = this.todoRepository.findById(id)
 
-        if (optional.isEmpty) throw TodoNotFoundException("There is no todo with id: $id")
+        if (!optional.isPresent) throw TodoNotFoundException("There is no todo with id: $id")
 
         val todo = optional.get()
         todo.done = !todo.done
