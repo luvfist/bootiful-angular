@@ -1,0 +1,17 @@
+<table>
+  <thead>
+  <tr>
+    <th>done</th>
+    <th>text</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let todo of todos | async">
+    <td><input type="checkbox" (click)="toggle(todo.id)" [checked]="todo.done"></td>
+    <td>{{todo.text}}</td>
+    <td><button (click)="delete(todo.id)">delete</button></td>
+  </tr>
+  </tbody>
+</table>
